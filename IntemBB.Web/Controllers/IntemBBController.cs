@@ -54,6 +54,16 @@ public class IntemBBController : Controller
         return null;
     }
 
+    private string FormatRecipeDisplay(DataRow row)
+    {
+        string name = row["Recipe_Name"].ToString() ?? "";
+        string startTime = FormatTime(row[1]);
+        string endTime = FormatTime(row[2]);
+        if (!string.IsNullOrEmpty(startTime) && !string.IsNullOrEmpty(endTime))
+            return $"{name} ({startTime} - {endTime})";
+        return name;
+    }
+
     [HttpGet]
     public IActionResult Index()
     {
@@ -132,7 +142,7 @@ public class IntemBBController : Controller
         for (int i = 0; i < recipes.Rows.Count; i++)
         {
             model.RecipeList.Add(new SelectListItem(
-                recipes.Rows[i]["Recipe_Name"].ToString(),
+                FormatRecipeDisplay(recipes.Rows[i]),
                 recipes.Rows[i]["RowNumber"].ToString()));
         }
 
@@ -187,7 +197,7 @@ public class IntemBBController : Controller
         {
             var rowNum = recipes.Rows[i]["RowNumber"].ToString();
             model.RecipeList.Add(new SelectListItem(
-                recipes.Rows[i]["Recipe_Name"].ToString(),
+                FormatRecipeDisplay(recipes.Rows[i]),
                 rowNum)
             { Selected = rowNum == model.SelectedRecipe });
         }
