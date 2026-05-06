@@ -1,0 +1,215 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="menu.master.cs" Inherits="IntemBB.Website.menu" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+     <link href="../Assets/Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../Assets/Script/jquery-ui.css" rel="stylesheet" />
+    <link href="../Assets/master/styles.css" rel="stylesheet" />
+    <script src="../Assets/master/jquery.min.js"></script>
+    <script src="../Assets/Script/jquery-ui.js"></script>
+    <script src="../Assets/Script/bootstrap.min.js"></script>
+  
+    <link href="../Assets/jquery-ui-themes-1.13.0/themes/base/jquery-ui.css" rel="stylesheet" />
+    
+      <script>
+        function closeMessage() {
+            $("#tblMessages").fadeOut(200);
+            $("#tbl_delete").fadeOut(200);
+        }
+
+        function closeDelete() {
+            $("#tbl_delete").fadeOut(200);
+        }
+        function Showmess() {
+            $("#tblMessages").fadeIn();
+            $("#tblMessages1").css("transform", "scale(1)");
+        }
+        function showDel() {
+            $("#tbl_delete").fadeIn();
+            $("#tbl_delete1").css("transform", "scale(1)");
+        }
+
+        function isNumberKeywithDOT(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 46 || charCode > 57 || charCode == 47))
+                return false;
+            else
+                return true;
+        }
+
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        }
+      </script>
+
+    <style>
+        .csli {
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function showLoading() {
+            $("#tblLoading").show();
+        }
+    </script>
+     <style>
+
+        tr.GridViewHeaderStyle th {
+            position: sticky;
+            top: 0;
+            background-color:dimgray;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            font-family: Arial;
+            font-size: 17px;
+        }
+
+        tr.GridViewRowStyle td {
+            border: solid 1px #ccc;
+            vertical-align: middle;
+            height: 30px;
+            padding-left: 10px;
+            padding-right: 10px;
+            font-family: Arial;
+            font-size: 15px;
+            color: #444444;
+            text-align: center;
+        }
+         p{
+    margin: 0;
+    padding: 0;
+}
+.wrap{
+    background-color: white;
+    height: 1800px;
+    width: 800px;
+}
+.header{
+    height: 100px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 50px 30px 20px  30px;
+}
+.header h1{
+    text-align: center;
+}
+.Contact{
+    border: 1px solid black;
+    margin: 0 30px;
+}
+.Contact table tr td{
+    padding-left: 40px;
+    padding-top: 10px;
+}
+@keyframes load-progress { 100% {
+    margin-left: -80px;
+    margin-top: -80px;
+    border-width: 80px;
+    opacity: 0;
+    }}
+
+@keyframes jet {
+     0% {transform: scale(1, 0.8);}
+     5% {transform: scale(0, 0.8);}
+    10% {transform: scale(1, 0.8);}
+    15% {transform: scale(0, 0.8);}
+    20% {transform: scale(1, 0.8);}
+    25% {transform: scale(0, 0.8);}
+    30% {transform: scale(0.8, 0.8);}
+    50% {transform: scale(0.8, 0.8);}
+    75% {transform: scale(0.8, 0.6);}
+   100% {transform: scale(0.8, 0.8);}
+}
+
+#loading {
+    width: 0;
+    height: 0;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    border: 1px solid #AAA;
+    -webkit-animation: load-progress 1s infinite;  
+    animation: load-progress 1s infinite;
+    -webkit-animation-delay: 1s;
+    animation-delay: 1s;
+    opacity: 0.6;
+}
+
+#loading-text {
+    width: 200px;
+    height: 200px;
+    left: 50%;
+    top: 50%;
+    margin-left: -100px;
+    margin-top: -100px;
+    position: absolute;
+    display: table;
+}
+
+#loading-text p {
+    font-family: Tahoma, Helvetica, sans-serif;
+    font-size: 18px;
+    text-align: center;
+    color: #888;
+    margin: 0;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#jet {
+    transform: scale(1, 0.8);
+    opacity: 0.3;
+    animation: jet 2s linear infinite;
+}
+    </style>  
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+             <table style="top: 5px; width: 100%; height: 50px; font-family: Arial; font-weight: bold; font-size: 20px; background-color:#2874A6   ">
+                <tr>
+                    <td class="text_menu" style="width:1420px" ><a href="IntemBB.aspx" style="color:black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>In lại tem hóa chất</u></a></td>
+                    <td style="padding-right: 0; width: 120px; font-family: Arial; font-weight: bold;">
+                        <a href="/Website/Logout.aspx" onclick="showLoading();" class="btn btn-danger" style="background-color: transparent; color: black; font-weight: bold">Đăng Xuất</a>
+                    </td>
+                </tr>
+            </table>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>  
+         <%--#### Loading Html ####--%>
+        <table id="tblLoading" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);">
+            <tr>
+                <td style="vertical-align: middle;">
+                    <div id="loading"></div>
+                    <div id="loading-text">
+                        <p>
+                            <svg id="jet" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 512 512">
+                                <path d="M307.4,354.4l92.6,30.2l-2.6-46.1l-101.2-90.4c0,0-22.7-152-24.7-168.3C266.9,44.6,255.9,32,255.9,32S245,44.6,240.5,79.8
+	c-2.1,16.3-24.7,168.3-24.7,168.3l-101.2,90.4l-2.6,46.1l92.6-30.2l1.2,10.8l-46.1,51l16,24l64.1-8l16,47.8l16.2-47.8l64.2,8l16-24
+         l-46.1-51L307.4,354.4z" />
+                            </svg>
+                        </p>
+                    </div>
+
+                </td>
+            </tr>
+        </table>
+         <%--#### Loading Html ####--%>
+    </form>
+</body>
+</html>

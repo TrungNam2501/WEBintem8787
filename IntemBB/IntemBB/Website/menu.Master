@@ -1,0 +1,188 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="menu.master.cs" Inherits="IntemBB.Website.menu" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title>Menu</title>
+    <link href="../Assets/Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../Assets/Script/jquery-ui.css" rel="stylesheet" />
+    <link href="../Assets/master/styles.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <script src="../Assets/master/jquery.min.js"></script>
+    <script src="../Assets/Script/jquery-ui.js"></script>
+    <script src="../Assets/Script/bootstrap.min.js"></script>
+    <link href="../Assets/jquery-ui-themes-1.13.0/themes/base/jquery-ui.css" rel="stylesheet" />
+
+    <style>
+        .navbar-custom {
+            background-color: #2874A6;
+            padding: 10px 30px;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-custom .nav-links a {
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            margin-right: 20px;
+            text-decoration: none;
+        }
+
+        .navbar-custom .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        .logout-btn {
+            background-color: #e74c3c;
+            color: white !important;
+            border: none;
+            padding: 6px 12px;
+            font-weight: bold;
+        }
+
+        .logout-btn:hover {
+            background-color: #c0392b;
+        }
+
+        tr.GridViewHeaderStyle th {
+            position: sticky;
+            top: 0;
+            background-color: dimgray;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            font-size: 17px;
+        }
+
+        tr.GridViewRowStyle td {
+            border: solid 1px #ccc;
+            height: 30px;
+            padding: 0 10px;
+            font-size: 15px;
+            color: #444;
+            text-align: center;
+        }
+
+        #tblLoading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        #loading {
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            border: 1px solid #AAA;
+            animation: load-progress 1s infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+
+        #loading-text {
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -100px;
+            margin-left: -100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Tahoma, sans-serif;
+            font-size: 18px;
+            color: #888;
+        }
+
+        @keyframes load-progress {
+            100% {
+                margin-left: -80px;
+                margin-top: -80px;
+                border-width: 80px;
+                opacity: 0;
+            }
+        }
+
+        @keyframes jet {
+            0%, 10%, 20% { transform: scale(1, 0.8); }
+            5%, 15%, 25% { transform: scale(0, 0.8); }
+            30%, 50%, 75%, 100% { transform: scale(0.8, 0.8); }
+        }
+
+        #jet {
+            transform: scale(1, 0.8);
+            opacity: 0.3;
+            animation: jet 2s linear infinite;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function closeMessage() {
+            $("#tblMessages").fadeOut(200);
+            $("#tbl_delete").fadeOut(200);
+        }
+
+        function closeDelete() {
+            $("#tbl_delete").fadeOut(200);
+        }
+        function Showmess() {
+            $("#tblMessages").fadeIn();
+            $("#tblMessages1").css("transform", "scale(1)");
+        }
+        function showDel() {
+            $("#tbl_delete").fadeIn();
+            $("#tbl_delete1").css("transform", "scale(1)");
+        }
+
+        function isNumberKeywithDOT(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 46 || charCode > 57 || charCode == 47))
+                return false;
+            else
+                return true;
+        }
+
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+            return true;
+        }
+    </script>
+    <asp:ContentPlaceHolder ID="head" runat="server" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="navbar-custom">
+            <div class="nav-links">
+                <a href="IntemBB.aspx"><i class="fa fa-print"></i> In lại tem hóa chất</a>
+               <%-- <a href="IntemKD.aspx"><i class="fa fa-barcode"></i> In tem KD</a>--%>
+            </div>
+            <a href="/Website/Logout.aspx" onclick="showLoading();" class="logout-btn">Đăng Xuất</a>
+        </div>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" />
+
+        <div id="tblLoading">
+            <div id="loading"></div>
+            <div id="loading-text">
+                <svg id="jet" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 512 512">
+                    <path d="M307.4,354.4l92.6,30.2l-2.6-46.1l-101.2-90.4c0,0-22.7-152-24.7-168.3C266.9,44.6,255.9,32,255.9,32S245,44.6,240.5,79.8
+                        c-2.1,16.3-24.7,168.3-24.7,168.3l-101.2,90.4l-2.6,46.1l92.6-30.2l1.2,10.8l-46.1,51l16,24l64.1-8l16,47.8l16.2-47.8l64.2,8l16-24
+                        l-46.1-51L307.4,354.4z" />
+                </svg>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

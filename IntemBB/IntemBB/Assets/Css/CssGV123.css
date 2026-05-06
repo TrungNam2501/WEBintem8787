@@ -1,0 +1,27 @@
+﻿GridView {
+    background-color: #F9F9F9;
+    white-space: nowrap;
+}
+
+tr.GridViewHeaderStyle th {
+    position: sticky;
+    top: 0;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    font-family: Arial;
+    font-size: 17px;
+}
+
+tr.GridViewRowStyle td {
+    border: solid 1px #ccc;
+    vertical-align: middle;
+    height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: Arial;
+    font-size: 15px;
+    color: #444444;
+    text-align:center;
+}

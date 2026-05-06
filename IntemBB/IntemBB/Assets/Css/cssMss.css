@@ -1,0 +1,4 @@
+﻿#tbl_add1 {
+    transform: scale(0);
+    transition: all .2s;
+}

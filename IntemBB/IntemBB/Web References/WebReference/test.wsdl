@@ -1,0 +1,1376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://tempuri.org/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="empno" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Get_Mesid_list">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Machno" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Mesid_listResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_Mesid_listResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRecipe_nameDuoi">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Machno" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRecipe_nameDuoiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRecipe_nameDuoiResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_shift">
+        <s:complexType />
+      </s:element>
+      <s:element name="Get_shiftResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_shiftResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Print_BB">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tenkeo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Machno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="printername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ca" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="usrno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="candao" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Soluong" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mesid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pallet" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Print_BBResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Print_BBResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Print_BB_Again">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usrno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Machno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="barcode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mesid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="soluong" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="printername" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tenkeo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Print_BB_AgainResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Print_BB_AgainResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Finish">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tenkeo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mesid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="machno" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FinishResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FinishResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Update">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="some" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mesid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="machno" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Dieudong">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="some" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tenkeo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="loaikeo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Machno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ca" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PDA" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="usrno" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DieudongResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DieudongResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getBarcode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mesid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getBarcodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getBarcodeResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_PrinterList">
+        <s:complexType />
+      </s:element>
+      <s:element name="Get_PrinterListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_PrinterListResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Barcode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mesid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="machno" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_BarcodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_BarcodeResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="mesidauto">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mesid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="mesidautoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mesidautoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Mesid_list_Inlai">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Machno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ca" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_Mesid_list_InlaiResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_Mesid_list_InlaiResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Mesid">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="machno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Tenkeo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MesidResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MesidResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="get_mesid">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Machno" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="get_mesidResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="get_mesidResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="get_mesid_recipe_weght">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="mesid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="get_mesid_recipe_weghtResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="get_mesid_recipe_weghtResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="rubnod">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="partno" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="rubnodResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rubnodResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="checkTemVang">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="barcode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="checkTemVangResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="checkTemVangResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="insIF_Scan2Mes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="barcode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="machine_no" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="insIF_Scan2MesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="insIF_Scan2MesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadPlanid">
+        <s:complexType />
+      </s:element>
+      <s:element name="LoadPlanidResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadPlanidResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ins_cantay">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="plan_id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="barcode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="recipe_name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="wgt" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ins_cantayResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ins_cantayResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Check_mes_pday">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="indate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="intime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pday" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Check_mes_pdayResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="Check_barcode_if_scan2mes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="barcode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Check_barcode_if_scan2mesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Check_barcode_if_scan2mesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Check_palletBB">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="palletno" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Check_palletBBResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Check_palletBBResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="insIF_Scan2Mes_new">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="barcode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="machine_no" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="insIF_Scan2Mes_newResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="insIF_Scan2Mes_newResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ins_LRweigh">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="barcode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="recipe" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="may" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ins_LRweighResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ins_LRweighResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ins_IF_Scan2Mes_new">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="barcode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="marchno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="partno" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ins_IF_Scan2Mes_newResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ins_IF_Scan2Mes_newResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="sanluong_daquet">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="barcode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="marchno" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="partno" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="sanluong_daquetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sanluong_daquetResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="sv_hoachat">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="may" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="chat" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="some" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="solo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="thoigian" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="hansd" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="nguoilam" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TGKT" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="real_num" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="plan_id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tenbieu" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tenbieu1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tenbieu2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tenbieu3" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pathFile" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="filename" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="sv_hoachatResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sv_hoachatResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="LoginSoapIn">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_Mesid_listSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_Mesid_list" />
+  </wsdl:message>
+  <wsdl:message name="Get_Mesid_listSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_Mesid_listResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRecipe_nameDuoiSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRecipe_nameDuoi" />
+  </wsdl:message>
+  <wsdl:message name="GetRecipe_nameDuoiSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRecipe_nameDuoiResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_shiftSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_shift" />
+  </wsdl:message>
+  <wsdl:message name="Get_shiftSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_shiftResponse" />
+  </wsdl:message>
+  <wsdl:message name="Print_BBSoapIn">
+    <wsdl:part name="parameters" element="tns:Print_BB" />
+  </wsdl:message>
+  <wsdl:message name="Print_BBSoapOut">
+    <wsdl:part name="parameters" element="tns:Print_BBResponse" />
+  </wsdl:message>
+  <wsdl:message name="Print_BB_AgainSoapIn">
+    <wsdl:part name="parameters" element="tns:Print_BB_Again" />
+  </wsdl:message>
+  <wsdl:message name="Print_BB_AgainSoapOut">
+    <wsdl:part name="parameters" element="tns:Print_BB_AgainResponse" />
+  </wsdl:message>
+  <wsdl:message name="FinishSoapIn">
+    <wsdl:part name="parameters" element="tns:Finish" />
+  </wsdl:message>
+  <wsdl:message name="FinishSoapOut">
+    <wsdl:part name="parameters" element="tns:FinishResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:Update" />
+  </wsdl:message>
+  <wsdl:message name="UpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="DieudongSoapIn">
+    <wsdl:part name="parameters" element="tns:Dieudong" />
+  </wsdl:message>
+  <wsdl:message name="DieudongSoapOut">
+    <wsdl:part name="parameters" element="tns:DieudongResponse" />
+  </wsdl:message>
+  <wsdl:message name="getBarcodeSoapIn">
+    <wsdl:part name="parameters" element="tns:getBarcode" />
+  </wsdl:message>
+  <wsdl:message name="getBarcodeSoapOut">
+    <wsdl:part name="parameters" element="tns:getBarcodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_PrinterListSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_PrinterList" />
+  </wsdl:message>
+  <wsdl:message name="Get_PrinterListSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_PrinterListResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_BarcodeSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_Barcode" />
+  </wsdl:message>
+  <wsdl:message name="Get_BarcodeSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_BarcodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="mesidautoSoapIn">
+    <wsdl:part name="parameters" element="tns:mesidauto" />
+  </wsdl:message>
+  <wsdl:message name="mesidautoSoapOut">
+    <wsdl:part name="parameters" element="tns:mesidautoResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_Mesid_list_InlaiSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_Mesid_list_Inlai" />
+  </wsdl:message>
+  <wsdl:message name="Get_Mesid_list_InlaiSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_Mesid_list_InlaiResponse" />
+  </wsdl:message>
+  <wsdl:message name="MesidSoapIn">
+    <wsdl:part name="parameters" element="tns:Mesid" />
+  </wsdl:message>
+  <wsdl:message name="MesidSoapOut">
+    <wsdl:part name="parameters" element="tns:MesidResponse" />
+  </wsdl:message>
+  <wsdl:message name="get_mesidSoapIn">
+    <wsdl:part name="parameters" element="tns:get_mesid" />
+  </wsdl:message>
+  <wsdl:message name="get_mesidSoapOut">
+    <wsdl:part name="parameters" element="tns:get_mesidResponse" />
+  </wsdl:message>
+  <wsdl:message name="get_mesid_recipe_weghtSoapIn">
+    <wsdl:part name="parameters" element="tns:get_mesid_recipe_weght" />
+  </wsdl:message>
+  <wsdl:message name="get_mesid_recipe_weghtSoapOut">
+    <wsdl:part name="parameters" element="tns:get_mesid_recipe_weghtResponse" />
+  </wsdl:message>
+  <wsdl:message name="rubnodSoapIn">
+    <wsdl:part name="parameters" element="tns:rubnod" />
+  </wsdl:message>
+  <wsdl:message name="rubnodSoapOut">
+    <wsdl:part name="parameters" element="tns:rubnodResponse" />
+  </wsdl:message>
+  <wsdl:message name="checkTemVangSoapIn">
+    <wsdl:part name="parameters" element="tns:checkTemVang" />
+  </wsdl:message>
+  <wsdl:message name="checkTemVangSoapOut">
+    <wsdl:part name="parameters" element="tns:checkTemVangResponse" />
+  </wsdl:message>
+  <wsdl:message name="insIF_Scan2MesSoapIn">
+    <wsdl:part name="parameters" element="tns:insIF_Scan2Mes" />
+  </wsdl:message>
+  <wsdl:message name="insIF_Scan2MesSoapOut">
+    <wsdl:part name="parameters" element="tns:insIF_Scan2MesResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadPlanidSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadPlanid" />
+  </wsdl:message>
+  <wsdl:message name="LoadPlanidSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadPlanidResponse" />
+  </wsdl:message>
+  <wsdl:message name="ins_cantaySoapIn">
+    <wsdl:part name="parameters" element="tns:ins_cantay" />
+  </wsdl:message>
+  <wsdl:message name="ins_cantaySoapOut">
+    <wsdl:part name="parameters" element="tns:ins_cantayResponse" />
+  </wsdl:message>
+  <wsdl:message name="Check_mes_pdaySoapIn">
+    <wsdl:part name="parameters" element="tns:Check_mes_pday" />
+  </wsdl:message>
+  <wsdl:message name="Check_mes_pdaySoapOut">
+    <wsdl:part name="parameters" element="tns:Check_mes_pdayResponse" />
+  </wsdl:message>
+  <wsdl:message name="Check_barcode_if_scan2mesSoapIn">
+    <wsdl:part name="parameters" element="tns:Check_barcode_if_scan2mes" />
+  </wsdl:message>
+  <wsdl:message name="Check_barcode_if_scan2mesSoapOut">
+    <wsdl:part name="parameters" element="tns:Check_barcode_if_scan2mesResponse" />
+  </wsdl:message>
+  <wsdl:message name="Check_palletBBSoapIn">
+    <wsdl:part name="parameters" element="tns:Check_palletBB" />
+  </wsdl:message>
+  <wsdl:message name="Check_palletBBSoapOut">
+    <wsdl:part name="parameters" element="tns:Check_palletBBResponse" />
+  </wsdl:message>
+  <wsdl:message name="insIF_Scan2Mes_newSoapIn">
+    <wsdl:part name="parameters" element="tns:insIF_Scan2Mes_new" />
+  </wsdl:message>
+  <wsdl:message name="insIF_Scan2Mes_newSoapOut">
+    <wsdl:part name="parameters" element="tns:insIF_Scan2Mes_newResponse" />
+  </wsdl:message>
+  <wsdl:message name="ins_LRweighSoapIn">
+    <wsdl:part name="parameters" element="tns:ins_LRweigh" />
+  </wsdl:message>
+  <wsdl:message name="ins_LRweighSoapOut">
+    <wsdl:part name="parameters" element="tns:ins_LRweighResponse" />
+  </wsdl:message>
+  <wsdl:message name="ins_IF_Scan2Mes_newSoapIn">
+    <wsdl:part name="parameters" element="tns:ins_IF_Scan2Mes_new" />
+  </wsdl:message>
+  <wsdl:message name="ins_IF_Scan2Mes_newSoapOut">
+    <wsdl:part name="parameters" element="tns:ins_IF_Scan2Mes_newResponse" />
+  </wsdl:message>
+  <wsdl:message name="sanluong_daquetSoapIn">
+    <wsdl:part name="parameters" element="tns:sanluong_daquet" />
+  </wsdl:message>
+  <wsdl:message name="sanluong_daquetSoapOut">
+    <wsdl:part name="parameters" element="tns:sanluong_daquetResponse" />
+  </wsdl:message>
+  <wsdl:message name="sv_hoachatSoapIn">
+    <wsdl:part name="parameters" element="tns:sv_hoachat" />
+  </wsdl:message>
+  <wsdl:message name="sv_hoachatSoapOut">
+    <wsdl:part name="parameters" element="tns:sv_hoachatResponse" />
+  </wsdl:message>
+  <wsdl:portType name="testSoap">
+    <wsdl:operation name="Login">
+      <wsdl:input message="tns:LoginSoapIn" />
+      <wsdl:output message="tns:LoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Mesid_list">
+      <wsdl:input message="tns:Get_Mesid_listSoapIn" />
+      <wsdl:output message="tns:Get_Mesid_listSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRecipe_nameDuoi">
+      <wsdl:input message="tns:GetRecipe_nameDuoiSoapIn" />
+      <wsdl:output message="tns:GetRecipe_nameDuoiSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_shift">
+      <wsdl:input message="tns:Get_shiftSoapIn" />
+      <wsdl:output message="tns:Get_shiftSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Print_BB">
+      <wsdl:input message="tns:Print_BBSoapIn" />
+      <wsdl:output message="tns:Print_BBSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Print_BB_Again">
+      <wsdl:input message="tns:Print_BB_AgainSoapIn" />
+      <wsdl:output message="tns:Print_BB_AgainSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Finish">
+      <wsdl:input message="tns:FinishSoapIn" />
+      <wsdl:output message="tns:FinishSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <wsdl:input message="tns:UpdateSoapIn" />
+      <wsdl:output message="tns:UpdateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Dieudong">
+      <wsdl:input message="tns:DieudongSoapIn" />
+      <wsdl:output message="tns:DieudongSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getBarcode">
+      <wsdl:input message="tns:getBarcodeSoapIn" />
+      <wsdl:output message="tns:getBarcodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_PrinterList">
+      <wsdl:input message="tns:Get_PrinterListSoapIn" />
+      <wsdl:output message="tns:Get_PrinterListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Barcode">
+      <wsdl:input message="tns:Get_BarcodeSoapIn" />
+      <wsdl:output message="tns:Get_BarcodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="mesidauto">
+      <wsdl:input message="tns:mesidautoSoapIn" />
+      <wsdl:output message="tns:mesidautoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Mesid_list_Inlai">
+      <wsdl:input message="tns:Get_Mesid_list_InlaiSoapIn" />
+      <wsdl:output message="tns:Get_Mesid_list_InlaiSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Mesid">
+      <wsdl:input message="tns:MesidSoapIn" />
+      <wsdl:output message="tns:MesidSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="get_mesid">
+      <wsdl:input message="tns:get_mesidSoapIn" />
+      <wsdl:output message="tns:get_mesidSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="get_mesid_recipe_weght">
+      <wsdl:input message="tns:get_mesid_recipe_weghtSoapIn" />
+      <wsdl:output message="tns:get_mesid_recipe_weghtSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="rubnod">
+      <wsdl:input message="tns:rubnodSoapIn" />
+      <wsdl:output message="tns:rubnodSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="checkTemVang">
+      <wsdl:input message="tns:checkTemVangSoapIn" />
+      <wsdl:output message="tns:checkTemVangSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="insIF_Scan2Mes">
+      <wsdl:input message="tns:insIF_Scan2MesSoapIn" />
+      <wsdl:output message="tns:insIF_Scan2MesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadPlanid">
+      <wsdl:input message="tns:LoadPlanidSoapIn" />
+      <wsdl:output message="tns:LoadPlanidSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ins_cantay">
+      <wsdl:input message="tns:ins_cantaySoapIn" />
+      <wsdl:output message="tns:ins_cantaySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Check_mes_pday">
+      <wsdl:input message="tns:Check_mes_pdaySoapIn" />
+      <wsdl:output message="tns:Check_mes_pdaySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Check_barcode_if_scan2mes">
+      <wsdl:input message="tns:Check_barcode_if_scan2mesSoapIn" />
+      <wsdl:output message="tns:Check_barcode_if_scan2mesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Check_palletBB">
+      <wsdl:input message="tns:Check_palletBBSoapIn" />
+      <wsdl:output message="tns:Check_palletBBSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="insIF_Scan2Mes_new">
+      <wsdl:input message="tns:insIF_Scan2Mes_newSoapIn" />
+      <wsdl:output message="tns:insIF_Scan2Mes_newSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ins_LRweigh">
+      <wsdl:input message="tns:ins_LRweighSoapIn" />
+      <wsdl:output message="tns:ins_LRweighSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ins_IF_Scan2Mes_new">
+      <wsdl:input message="tns:ins_IF_Scan2Mes_newSoapIn" />
+      <wsdl:output message="tns:ins_IF_Scan2Mes_newSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="sanluong_daquet">
+      <wsdl:input message="tns:sanluong_daquetSoapIn" />
+      <wsdl:output message="tns:sanluong_daquetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="sv_hoachat">
+      <wsdl:input message="tns:sv_hoachatSoapIn" />
+      <wsdl:output message="tns:sv_hoachatSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="testSoap" type="tns:testSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Mesid_list">
+      <soap:operation soapAction="http://tempuri.org/Get_Mesid_list" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRecipe_nameDuoi">
+      <soap:operation soapAction="http://tempuri.org/GetRecipe_nameDuoi" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_shift">
+      <soap:operation soapAction="http://tempuri.org/Get_shift" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Print_BB">
+      <soap:operation soapAction="http://tempuri.org/Print_BB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Print_BB_Again">
+      <soap:operation soapAction="http://tempuri.org/Print_BB_Again" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Finish">
+      <soap:operation soapAction="http://tempuri.org/Finish" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap:operation soapAction="http://tempuri.org/Update" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Dieudong">
+      <soap:operation soapAction="http://tempuri.org/Dieudong" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBarcode">
+      <soap:operation soapAction="http://tempuri.org/getBarcode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_PrinterList">
+      <soap:operation soapAction="http://tempuri.org/Get_PrinterList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Barcode">
+      <soap:operation soapAction="http://tempuri.org/Get_Barcode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="mesidauto">
+      <soap:operation soapAction="http://tempuri.org/mesidauto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Mesid_list_Inlai">
+      <soap:operation soapAction="http://tempuri.org/Get_Mesid_list_Inlai" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Mesid">
+      <soap:operation soapAction="http://tempuri.org/Mesid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_mesid">
+      <soap:operation soapAction="http://tempuri.org/get_mesid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_mesid_recipe_weght">
+      <soap:operation soapAction="http://tempuri.org/get_mesid_recipe_weght" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="rubnod">
+      <soap:operation soapAction="http://tempuri.org/rubnod" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkTemVang">
+      <soap:operation soapAction="http://tempuri.org/checkTemVang" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insIF_Scan2Mes">
+      <soap:operation soapAction="http://tempuri.org/insIF_Scan2Mes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadPlanid">
+      <soap:operation soapAction="http://tempuri.org/LoadPlanid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ins_cantay">
+      <soap:operation soapAction="http://tempuri.org/ins_cantay" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Check_mes_pday">
+      <soap:operation soapAction="http://tempuri.org/Check_mes_pday" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Check_barcode_if_scan2mes">
+      <soap:operation soapAction="http://tempuri.org/Check_barcode_if_scan2mes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Check_palletBB">
+      <soap:operation soapAction="http://tempuri.org/Check_palletBB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insIF_Scan2Mes_new">
+      <soap:operation soapAction="http://tempuri.org/insIF_Scan2Mes_new" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ins_LRweigh">
+      <soap:operation soapAction="http://tempuri.org/ins_LRweigh" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ins_IF_Scan2Mes_new">
+      <soap:operation soapAction="http://tempuri.org/ins_IF_Scan2Mes_new" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sanluong_daquet">
+      <soap:operation soapAction="http://tempuri.org/sanluong_daquet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sv_hoachat">
+      <soap:operation soapAction="http://tempuri.org/sv_hoachat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="testSoap12" type="tns:testSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://tempuri.org/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Mesid_list">
+      <soap12:operation soapAction="http://tempuri.org/Get_Mesid_list" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRecipe_nameDuoi">
+      <soap12:operation soapAction="http://tempuri.org/GetRecipe_nameDuoi" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_shift">
+      <soap12:operation soapAction="http://tempuri.org/Get_shift" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Print_BB">
+      <soap12:operation soapAction="http://tempuri.org/Print_BB" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Print_BB_Again">
+      <soap12:operation soapAction="http://tempuri.org/Print_BB_Again" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Finish">
+      <soap12:operation soapAction="http://tempuri.org/Finish" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap12:operation soapAction="http://tempuri.org/Update" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Dieudong">
+      <soap12:operation soapAction="http://tempuri.org/Dieudong" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBarcode">
+      <soap12:operation soapAction="http://tempuri.org/getBarcode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_PrinterList">
+      <soap12:operation soapAction="http://tempuri.org/Get_PrinterList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Barcode">
+      <soap12:operation soapAction="http://tempuri.org/Get_Barcode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="mesidauto">
+      <soap12:operation soapAction="http://tempuri.org/mesidauto" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Mesid_list_Inlai">
+      <soap12:operation soapAction="http://tempuri.org/Get_Mesid_list_Inlai" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Mesid">
+      <soap12:operation soapAction="http://tempuri.org/Mesid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_mesid">
+      <soap12:operation soapAction="http://tempuri.org/get_mesid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_mesid_recipe_weght">
+      <soap12:operation soapAction="http://tempuri.org/get_mesid_recipe_weght" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="rubnod">
+      <soap12:operation soapAction="http://tempuri.org/rubnod" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkTemVang">
+      <soap12:operation soapAction="http://tempuri.org/checkTemVang" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insIF_Scan2Mes">
+      <soap12:operation soapAction="http://tempuri.org/insIF_Scan2Mes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadPlanid">
+      <soap12:operation soapAction="http://tempuri.org/LoadPlanid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ins_cantay">
+      <soap12:operation soapAction="http://tempuri.org/ins_cantay" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Check_mes_pday">
+      <soap12:operation soapAction="http://tempuri.org/Check_mes_pday" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Check_barcode_if_scan2mes">
+      <soap12:operation soapAction="http://tempuri.org/Check_barcode_if_scan2mes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Check_palletBB">
+      <soap12:operation soapAction="http://tempuri.org/Check_palletBB" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insIF_Scan2Mes_new">
+      <soap12:operation soapAction="http://tempuri.org/insIF_Scan2Mes_new" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ins_LRweigh">
+      <soap12:operation soapAction="http://tempuri.org/ins_LRweigh" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ins_IF_Scan2Mes_new">
+      <soap12:operation soapAction="http://tempuri.org/ins_IF_Scan2Mes_new" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sanluong_daquet">
+      <soap12:operation soapAction="http://tempuri.org/sanluong_daquet" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sv_hoachat">
+      <soap12:operation soapAction="http://tempuri.org/sv_hoachat" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="test">
+    <wsdl:port name="testSoap" binding="tns:testSoap">
+      <soap:address location="http://198.1.9.245:9180/test.asmx" />
+    </wsdl:port>
+    <wsdl:port name="testSoap12" binding="tns:testSoap12">
+      <soap12:address location="http://198.1.9.245:9180/test.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
