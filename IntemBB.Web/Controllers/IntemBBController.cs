@@ -485,37 +485,30 @@ public class IntemBBController : Controller
 
         // Get OEM
         string oem = GetOEM(planId);
-        if (string.IsNullOrEmpty(oem))
+
+        string updateKvs = "KVS3JIC001. 10 Rev. 4";
+        if (equipCode == "01" || equipCode == "02")
+            updateKvs = "KVS3JIC001. 11 Rev. 4";
+
+        var printModel = new PrintLabelViewModel
         {
-            model.ThongBao = "Không có dữ liệu oem";
-            return View("Index", model);
-        }
+            TenBieu = tenbieu,
+            TenBieu1 = tenbieu1,
+            TenBieu2 = tenbieu2,
+            TenBieu3 = tenbieu3,
+            Chat = recipeName,
+            May = equipCode,
+            SoMe = realNum + "/" + model.SoMeSX,
+            Solo = slipno,
+            ThoiGian = model.ThoiGianSX,
+            HanSD = model.NgayHieuLuc,
+            NguoiLam = model.NguoiThaoTac,
+            PlanId = planId,
+            UpdateKvs = updateKvs,
+            OEM = oem
+        };
 
-        // Create Excel file
-        string dataFolder = Path.Combine(Directory.GetCurrentDirectory(), "Data_HC");
-        if (!Directory.Exists(dataFolder)) Directory.CreateDirectory(dataFolder);
-
-        string filename = "_" + model.SelectedMayIn.Trim() + ".xlsx";
-        string pathFile = Path.Combine(dataFolder, filename);
-
-        string excelResult = _excelService.CreateExcel(
-            equipCode, recipeName, model.SoMeSX, slipno,
-            model.ThoiGianSX, model.NgayHieuLuc, model.NguoiThaoTac,
-            model.ThoiGianKT, realNum, planId,
-            tenbieu, tenbieu1, tenbieu2, tenbieu3, pathFile, oem);
-
-        if (string.IsNullOrEmpty(excelResult))
-        {
-            model.ThongBao = "Lỗi tạo file Excel";
-            return View("Index", model);
-        }
-
-        // Return Excel file for download
-        var fileBytes = System.IO.File.ReadAllBytes(pathFile);
-        try { System.IO.File.Delete(pathFile); } catch { }
-        return File(fileBytes,
-            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-            $"TemHC_{recipeName}_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx");
+        return View("PrintLabel", printModel);
     }
 
     private string GetEquipCode(string selectedMachine)
