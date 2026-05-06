@@ -486,29 +486,46 @@ public class IntemBBController : Controller
         // Get OEM
         string oem = GetOEM(planId);
 
-        string updateKvs = "KVS3JIC001. 10 Rev. 4";
-        if (equipCode == "01" || equipCode == "02")
-            updateKvs = "KVS3JIC001. 11 Rev. 4";
+        // Create Excel file
+        string dataFolder = Path.Combine(Directory.GetCurrentDirectory(), "Data_HC");
+        if (!Directory.Exists(dataFolder)) Directory.CreateDirectory(dataFolder);
 
-        var printModel = new PrintLabelViewModel
+        string filename = "_" + model.SelectedMayIn.Trim() + ".xlsx";
+        string pathFile = Path.Combine(dataFolder, filename);
+
+        string excelResult = _excelService.CreateExcel(
+            equipCode, recipeName, model.SoMeSX, slipno,
+            model.ThoiGianSX, model.NgayHieuLuc, model.NguoiThaoTac,
+            model.ThoiGianKT, realNum, planId,
+            tenbieu, tenbieu1, tenbieu2, tenbieu3, pathFile, oem);
+
+        if (string.IsNullOrEmpty(excelResult))
         {
-            TenBieu = tenbieu,
-            TenBieu1 = tenbieu1,
-            TenBieu2 = tenbieu2,
-            TenBieu3 = tenbieu3,
-            Chat = recipeName,
-            May = equipCode,
-            SoMe = realNum + "/" + model.SoMeSX,
-            Solo = slipno,
-            ThoiGian = model.ThoiGianSX,
-            HanSD = model.NgayHieuLuc,
-            NguoiLam = model.NguoiThaoTac,
-            PlanId = planId,
-            UpdateKvs = updateKvs,
-            OEM = oem
-        };
+            model.ThongBao = "Lỗi tạo file Excel";
+            ReloadRecipeList(model, equipCode);
+            return View("Index", model);
+        }
 
-        return View("PrintLabel", printModel);
+        // Print directly to printer on server
+        string printerName = model.SelectedMayIn.Trim();
+        var (printSuccess, printMessage) = _excelService.PrintExcel(printerName, pathFile);
+
+        model.ThongBao = printMessage;
+        ReloadRecipeList(model, equipCode);
+        return View("Index", model);
+    }
+
+    private void ReloadRecipeList(IntemBBViewModel model, string equipCode)
+    {
+        var recipes = LoadRecipes(model.SoLo, equipCode);
+        model.RecipeList = new List<SelectListItem>();
+        for (int i = 0; i < recipes.Rows.Count; i++)
+        {
+            model.RecipeList.Add(new SelectListItem(
+                FormatRecipeDisplay(recipes.Rows[i]),
+                recipes.Rows[i]["RowNumber"].ToString())
+            { Selected = recipes.Rows[i]["RowNumber"].ToString() == model.SelectedRecipe });
+        }
     }
 
     private string GetEquipCode(string selectedMachine)
