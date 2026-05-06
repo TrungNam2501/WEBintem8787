@@ -68,6 +68,7 @@ public class IntemBBController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult CheckConnection(IntemBBViewModel model)
     {
+        ModelState.Clear();
         if (!string.IsNullOrEmpty(model.SelectedMachine))
         {
             var (success, message) = _networkService.CheckMachineConnection(model.SelectedMachine);
@@ -82,6 +83,7 @@ public class IntemBBController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult SelectMachine(IntemBBViewModel model)
     {
+        ModelState.Clear();
         model.NguoiThaoTac = GetUserId();
 
         if (string.IsNullOrEmpty(model.SelectedMachine))
@@ -161,6 +163,7 @@ public class IntemBBController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult SelectRecipe(IntemBBViewModel model)
     {
+        ModelState.Clear();
         model.NguoiThaoTac = GetUserId();
 
         if (string.IsNullOrEmpty(model.SelectedMachine))
@@ -180,8 +183,21 @@ public class IntemBBController : Controller
 
         if (string.IsNullOrEmpty(equipCode)) return View("Index", model);
 
+        // Set label type based on machine
+        model.LabelType = (equipCode == "01" || equipCode == "02") ? "Chất phối hợp" : "Chất xúc tiến";
+
+        // Check connection
+        var (success, message) = _networkService.CheckMachineConnection(model.SelectedMachine);
+        model.ConnectionStatus = message;
+
         // Reload recipes
         var recipes = LoadRecipes(model.SoLo, equipCode);
+        if (recipes.Rows.Count == 0)
+        {
+            model.ThongBao = "Không có dữ liệu";
+            return View("Index", model);
+        }
+
         model.RecipeList = new List<SelectListItem>();
         for (int i = 0; i < recipes.Rows.Count; i++)
         {
@@ -206,11 +222,11 @@ public class IntemBBController : Controller
         model.ThoiGianKT = FormatTime(selectedRow[2]);
         model.ThoiGianSX = FormatTime(selectedRow[1]) + " | " + model.ThoiGianKT;
 
+        // NgayHieuLuc: original code uses SoLo date when changing recipe
         var validDays = GetValidDays(recipeName, equipCode);
-        var endDate = ParseDateTime(selectedRow[2]);
-        if (validDays > 0 && endDate.HasValue)
+        if (validDays > 0 && DateTime.TryParse(model.SoLo, out var soLoDate))
         {
-            model.NgayHieuLuc = endDate.Value.AddDays(validDays).ToString("yyyy-MM-dd");
+            model.NgayHieuLuc = soLoDate.AddDays(validDays).ToString("yyyy-MM-dd");
         }
 
         var planInfo = GetPlanInfo(model.SoLo, equipCode, recipeName, model.ThoiGianKT);
@@ -225,6 +241,7 @@ public class IntemBBController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult PrintLabel(IntemBBViewModel model)
     {
+        ModelState.Clear();
         model.NguoiThaoTac = GetUserId();
 
         // Validate inputs
