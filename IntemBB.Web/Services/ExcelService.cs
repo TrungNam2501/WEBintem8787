@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 
@@ -264,6 +266,73 @@ public class ExcelService
         {
             Console.WriteLine($"Excel Error: {ex.Message}");
             return string.Empty;
+        }
+    }
+
+    public (bool Success, string Message) PrintExcel(string printerName, string pathFile)
+    {
+        if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            return (false, "In trực tiếp chỉ hỗ trợ trên Windows Server");
+        }
+
+        try
+        {
+            if (printerName.StartsWith("Fax") || printerName.StartsWith("Foxit")
+                || printerName.StartsWith("Microsoft"))
+            {
+                try { File.Delete(pathFile); } catch { }
+                return (false, "Chọn lại máy in");
+            }
+
+            dynamic? excelApp = null;
+            dynamic? wb = null;
+            try
+            {
+                var excelType = Type.GetTypeFromProgID("Excel.Application");
+                if (excelType == null)
+                    return (false, "Không tìm thấy Microsoft Excel trên server");
+
+                excelApp = Activator.CreateInstance(excelType);
+                if (excelApp == null)
+                    return (false, "Không thể khởi tạo Excel Application");
+
+                excelApp.Visible = false;
+                excelApp.DisplayAlerts = false;
+
+                wb = excelApp.Workbooks.Open(pathFile);
+                wb.Worksheets[1].PrintOut(
+                    Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                    printerName, Type.Missing, Type.Missing, Type.Missing);
+
+                wb.Close(false);
+                Marshal.ReleaseComObject(wb);
+                wb = null;
+
+                excelApp.Quit();
+                Marshal.ReleaseComObject(excelApp);
+                excelApp = null;
+
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+
+                try { File.Delete(pathFile); } catch { }
+                return (true, printerName + " - In thành công");
+            }
+            catch (Exception ex)
+            {
+                if (wb != null) { try { wb.Close(false); Marshal.ReleaseComObject(wb); } catch { } }
+                if (excelApp != null) { try { excelApp.Quit(); Marshal.ReleaseComObject(excelApp); } catch { } }
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                try { File.Delete(pathFile); } catch { }
+                return (false, "Lỗi in: " + ex.Message);
+            }
+        }
+        catch (Exception ex)
+        {
+            try { File.Delete(pathFile); } catch { }
+            return (false, "Lỗi: " + ex.Message);
         }
     }
 }
