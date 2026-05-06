@@ -38,6 +38,22 @@ public class IntemBBController : Controller
         return User.FindFirst("UserId")?.Value ?? "";
     }
 
+    private string FormatTime(object? value)
+    {
+        if (value == null || value == DBNull.Value) return "";
+        if (value is DateTime dt) return dt.ToString("HH:mm:ss");
+        if (DateTime.TryParse(value.ToString(), out var parsed)) return parsed.ToString("HH:mm:ss");
+        return "";
+    }
+
+    private DateTime? ParseDateTime(object? value)
+    {
+        if (value == null || value == DBNull.Value) return null;
+        if (value is DateTime dt) return dt;
+        if (DateTime.TryParse(value.ToString(), out var parsed)) return parsed;
+        return null;
+    }
+
     [HttpGet]
     public IActionResult Index()
     {
@@ -121,15 +137,15 @@ public class IntemBBController : Controller
         }
 
         // Set time info from first recipe
-        model.ThoiGianKT = recipes.Rows[0][2].ToString()?.Substring(11, 8) ?? "";
-        model.ThoiGianSX = recipes.Rows[0][1].ToString()?.Substring(11, 8) + " | " + model.ThoiGianKT;
+        model.ThoiGianKT = FormatTime(recipes.Rows[0][2]);
+        model.ThoiGianSX = FormatTime(recipes.Rows[0][1]) + " | " + model.ThoiGianKT;
 
         // Get valid days
         var validDays = GetValidDays(recipes.Rows[0][0].ToString() ?? "", equipCode);
-        if (validDays > 0)
+        var endDate = ParseDateTime(recipes.Rows[0][2]);
+        if (validDays > 0 && endDate.HasValue)
         {
-            model.NgayHieuLuc = Convert.ToDateTime(recipes.Rows[0][2].ToString())
-                .AddDays(validDays).ToString("yyyy-MM-dd");
+            model.NgayHieuLuc = endDate.Value.AddDays(validDays).ToString("yyyy-MM-dd");
         }
 
         // Get plan info
@@ -187,14 +203,14 @@ public class IntemBBController : Controller
 
         var selectedRow = recipes.Rows[selectedIdx];
         string recipeName = selectedRow["Recipe_Name"].ToString() ?? "";
-        model.ThoiGianKT = selectedRow[2].ToString()?.Substring(11, 8) ?? "";
-        model.ThoiGianSX = selectedRow[1].ToString()?.Substring(11, 8) + " | " + model.ThoiGianKT;
+        model.ThoiGianKT = FormatTime(selectedRow[2]);
+        model.ThoiGianSX = FormatTime(selectedRow[1]) + " | " + model.ThoiGianKT;
 
         var validDays = GetValidDays(recipeName, equipCode);
-        if (validDays > 0)
+        var endDate = ParseDateTime(selectedRow[2]);
+        if (validDays > 0 && endDate.HasValue)
         {
-            model.NgayHieuLuc = Convert.ToDateTime(selectedRow[2].ToString())
-                .AddDays(validDays).ToString("yyyy-MM-dd");
+            model.NgayHieuLuc = endDate.Value.AddDays(validDays).ToString("yyyy-MM-dd");
         }
 
         var planInfo = GetPlanInfo(model.SoLo, equipCode, recipeName, model.ThoiGianKT);
@@ -309,8 +325,8 @@ public class IntemBBController : Controller
             planId = ""; planNum = "0"; soMeSX = "0";
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                var endDate = dt.Rows[i][2].ToString()?.Trim();
-                if (endDate != null && endDate.Length >= 19 && endDate.Substring(11, 8) == thoiGianKT)
+                var endTime = FormatTime(dt.Rows[i][2]);
+                if (endTime == thoiGianKT)
                 {
                     planId = dt.Rows[i][0].ToString()?.Trim() ?? "";
                     planNum = dt.Rows[i][1].ToString()?.Trim() ?? "0";
