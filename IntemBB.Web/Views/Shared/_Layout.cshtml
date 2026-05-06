@@ -65,6 +65,59 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+        <script>
+            (function () {
+                var timeoutMinutes = 60;
+                var warningMinutes = 5;
+                var idleTimer, warningTimer;
+
+                function resetTimers() {
+                    clearTimeout(idleTimer);
+                    clearTimeout(warningTimer);
+                    var warningModal = document.getElementById('idleWarningModal');
+                    if (warningModal) {
+                        var bsModal = bootstrap.Modal.getInstance(warningModal);
+                        if (bsModal) bsModal.hide();
+                    }
+                    warningTimer = setTimeout(function () {
+                        var modal = new bootstrap.Modal(document.getElementById('idleWarningModal'));
+                        modal.show();
+                    }, (timeoutMinutes - warningMinutes) * 60 * 1000);
+                    idleTimer = setTimeout(function () {
+                        window.location.href = '@Url.Action("Login", "Account")';
+                    }, timeoutMinutes * 60 * 1000);
+                }
+
+                ['mousemove', 'mousedown', 'keypress', 'scroll', 'touchstart', 'click'].forEach(function (evt) {
+                    document.addEventListener(evt, resetTimers, { passive: true });
+                });
+
+                resetTimers();
+            })();
+        </script>
+
+        <div class="modal fade" id="idleWarningModal" tabindex="-1" data-bs-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-warning">
+                        <h5 class="modal-title"><i class="bi bi-exclamation-triangle"></i> Cảnh báo</h5>
+                    </div>
+                    <div class="modal-body text-center" style="font-size: 18px;">
+                        <p>Bạn không thao tác trong thời gian dài.</p>
+                        <p>Hệ thống sẽ <strong>tự động đăng xuất sau 5 phút</strong> nữa.</p>
+                        <p>Nhấn bất kỳ đâu hoặc di chuột để tiếp tục làm việc.</p>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal">Tiếp tục làm việc</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
