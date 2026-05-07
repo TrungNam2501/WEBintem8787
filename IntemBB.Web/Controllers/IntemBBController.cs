@@ -76,12 +76,12 @@ public class IntemBBController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult CheckConnection(IntemBBViewModel model)
+    public async Task<IActionResult> CheckConnection(IntemBBViewModel model)
     {
         ModelState.Clear();
         if (!string.IsNullOrEmpty(model.SelectedMachine))
         {
-            var (success, message) = _networkService.CheckMachineConnection(model.SelectedMachine);
+            var (success, message) = await _networkService.CheckMachineConnectionAsync(model.SelectedMachine);
             model.ConnectionStatus = message;
         }
 
@@ -91,7 +91,7 @@ public class IntemBBController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult SelectMachine(IntemBBViewModel model)
+    public async Task<IActionResult> SelectMachine(IntemBBViewModel model)
     {
         ModelState.Clear();
         model.NguoiThaoTac = GetUserId();
@@ -103,7 +103,7 @@ public class IntemBBController : Controller
         }
 
         // Check connection
-        var (success, message) = _networkService.CheckMachineConnection(model.SelectedMachine);
+        var (success, message) = await _networkService.CheckMachineConnectionAsync(model.SelectedMachine);
         model.ConnectionStatus = message;
 
         // Determine equip code and label type
@@ -171,7 +171,7 @@ public class IntemBBController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult SelectRecipe(IntemBBViewModel model)
+    public async Task<IActionResult> SelectRecipe(IntemBBViewModel model)
     {
         ModelState.Clear();
         model.NguoiThaoTac = GetUserId();
@@ -197,7 +197,7 @@ public class IntemBBController : Controller
         model.LabelType = (equipCode == "01" || equipCode == "02") ? "Chất phối hợp" : "Chất xúc tiến";
 
         // Check connection
-        var (success, message) = _networkService.CheckMachineConnection(model.SelectedMachine);
+        var (success, message) = await _networkService.CheckMachineConnectionAsync(model.SelectedMachine);
         model.ConnectionStatus = message;
 
         // Reload recipes
